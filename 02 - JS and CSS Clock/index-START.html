@@ -63,7 +63,19 @@
       position: absolute;
       top: 50%;
       transform-origin: 100%;
-      transform: rotate(90deg);
+    }
+
+    .second-hand {
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0,2.01,1,2.03);
+    }
+
+    .min-hand {
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0,2.01,1,2.03);
+    }
+
+    .hour-hand {
       transition: all 0.05s;
       transition-timing-function: cubic-bezier(0,2.01,1,2.03);
     }
@@ -87,6 +99,14 @@
       secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
       minuteHand.style.transform = `rotate(${minutesDegrees}deg)`;
       hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+      toggleTranstion(secondsDegrees, secondHand);
+    }
+
+    const toggleTranstion = (degrees, target) => {
+      if (degrees >= 440) {
+        target.style.removeProperty("transition");
+      }
     }
 
     setInterval(setDate, 1000)
