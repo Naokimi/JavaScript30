@@ -24,13 +24,23 @@
 
   const findMatches = (wordToMatch, cities) => {
     return cities.filter(place => {
-      const regex = new RexExp(wordToMatch, 'gi');
+      const regex = new RegExp(wordToMatch, 'gi');
       return place.city.match(regex) || place.state.match(regex);
     });
   }
 
   function displayMatches() {
-    console.log(this.value);
+    const matchArray = findMatches(this.value, cities);
+    const html = matchArray.map(place => {
+      return `
+        <li>
+          <span class="name">${place.city}, ${place.state}</span>
+          <span class="population">${place.population}</span>
+        </li>
+      `;
+    }).join('');
+    console.log(html);
+    suggestions.innerHTML = html;
   }
 
   const searchInput = document.querySelector('.search');
